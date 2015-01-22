@@ -1,8 +1,9 @@
 /**
- * This interface is implemented by all Operations. It defines a method to execute an Operation.
+ * This interface is implemented by all Operations (optional in round 6). It defines a method to
+ * execute an Operation.
  * 
  * @version 7
- * @author PP
+ * @author EProg
  * 
  */
 public interface Operation {

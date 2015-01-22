@@ -2,21 +2,22 @@ import java.util.Scanner;
 
 public class LoadOperation implements Operation {
 	
-	String	data;
+	//Variabeln
+	String data = "";
 	String errChar = "illegal character";
 	
-	public LoadOperation(String data) {
-		this.data = data;
-	}
+	//Konstruktor
+	public LoadOperation(String data) { this.data = data; }
 	
 	@Override
 	public AsciiImage execute(AsciiImage img) throws OperationException 
 	{
-		Scanner sc = new Scanner(this.data);
+		Scanner sc = new Scanner(data);
 		String s;
 		int y = 0;
 		AsciiImage aiNew = new AsciiImage(img);
 		
+		//Pixel werden auf Zeichen gesetzt und dabei mit dem verfuegbaren Zeichensatz verglichen
 		while (sc.hasNextLine()) 
 		{
 			s = sc.nextLine();
@@ -34,6 +35,8 @@ public class LoadOperation implements Operation {
 			y++;
 		}
 		//System.out.println(y;aiNew.getHeight);
+		
+		//Vergleich mit create-Dimension
 		if (y > aiNew.getHeight())
 		{
 			OperationException err = new OperationException("Too less data input!");

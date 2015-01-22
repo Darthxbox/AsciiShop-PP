@@ -2,10 +2,14 @@ import java.util.Scanner;
 
 public class BinaryFactory implements Factory {
 	
-	public BinaryFactory() {}
-
+	//Variabeln
 	char grenze;
 	
+	//Konstruktor
+	public BinaryFactory() {}
+
+	
+	//Vorbedingungen fuer die BinaerOperation
 	@Override
 	public Operation create(Scanner scanner) throws FactoryException {
 		FactoryException err = new FactoryException();	

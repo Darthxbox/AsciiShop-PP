@@ -2,12 +2,12 @@ public class AsciiStackNode {
 		
 		//Variabeln
 		public AsciiStackNode next;
-		public AsciiImage ai;
+		public AsciiImage aiCur;
 		
 		//Konstruktor mit Bild und Pointer
 		public AsciiStackNode(AsciiImage ai, AsciiStackNode next) 
 		{
-			ai = new AsciiImage(ai);
+			aiCur = new AsciiImage(ai);
 			next = next;
 		}
 		
@@ -24,5 +24,5 @@ public class AsciiStackNode {
 		public AsciiStackNode getNext() { return this.next; }
 		
 		//Gibt das Bild des aktuellen Knotens zurueck
-		public AsciiImage getImage() { return this.ai; }
+		public AsciiImage getImage() { return this.aiCur; }
 	}

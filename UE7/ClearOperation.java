@@ -1,11 +1,12 @@
 public class ClearOperation implements Operation {
 	
-	public ClearOperation() {
-	}
+	//Konstruktor
+	public ClearOperation() { }
 
+	//Erzeugt ein neues Bild aus dem Uebergebenen
 	@Override
-	public AsciiImage execute(AsciiImage img) throws OperationException {
-		return new AsciiImage(img.getWidth(), img.getHeight(), img.getCharset());
+	public AsciiImage execute(AsciiImage ai) throws OperationException {
+		return new AsciiImage(ai.getWidth(), ai.getHeight(), ai.getCharset());
 	}
 	
 }

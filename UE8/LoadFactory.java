@@ -2,15 +2,18 @@ import java.util.Scanner;
 
 public class LoadFactory implements Factory {
 	
+	//Konstruktor
 	public LoadFactory() { }
 	
 	@Override
 	public Operation create(Scanner scanner) throws FactoryException 
 	{
+		//Variabeln
 		String content = "";
 		String sLine= "";
 		String loadFlag = "";
 		
+		//Setze End-String (loadFlag)
 		if (scanner.hasNext())
 		{
 			loadFlag = scanner.next();
@@ -23,6 +26,7 @@ public class LoadFactory implements Factory {
 		
 		scanner.nextLine();
 		
+		//End-String des Ladevorgangs erkennen und Zeilen hinzufuegen.
 		while (scanner.hasNextLine()) 
 		{
 			sLine = scanner.nextLine();

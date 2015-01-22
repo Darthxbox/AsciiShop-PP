@@ -1,10 +1,13 @@
 public class BinaryOperation implements Operation {
 	
+	//Variabeln
 	char grenze;
 	String zeichenFolge = "";
 	
+	//Konstruktor
 	public BinaryOperation(char grenze) { this.grenze = grenze;}
 	
+	//Methode zur Umwandlung in Binaerbild. Dabei wird nur die spezielle Helligkeitspalette angewendet.
 	@Override
 	public AsciiImage execute(AsciiImage ai) throws OperationException 
 	{

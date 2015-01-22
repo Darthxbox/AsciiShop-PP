@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 class AsciiShop {
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, OperationException 
-    {
-    	//Diverse Variablen und Objekte werden für die spaetere Verwendung initialisiert. 
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, OperationException {
         Scanner scFile = new Scanner(System.in);
         AsciiImage ai = null;
         AsciiStack as = new AsciiStack();
@@ -19,13 +17,8 @@ class AsciiShop {
 
         try {
 
-        	//Liest die Eingabe bis zum Ende
             while (scFile.hasNext()) {
-            	    
                 String line = scFile.nextLine();
-                
-                //Create-Block - Die erste Zeile, in diesem Fall immer ein create-Befehl, wird eingelesen und
-		//so untersucht, dass Hoehe, Breite und der Zeichensatz ausgelesen werden können.
                 if (line.contains("create")) {
                     if (createFlag) {
                         String temp[] = line.split(" ");
@@ -43,15 +36,11 @@ class AsciiShop {
 
                 }
 
-                //Abfrage der Befehle
-                
-                //Löschen bzw. alles auf Punkt (.) setzen
                 if (line.contains("clear")) {
                     as.push(new AsciiImage(ai));
                     ai = new ClearOperation().execute(ai);
                 }
                 
-                //Wende den Filter and
                 if (line.contains("filter")) 
                 {
                 	String temp[] = line.split(" ");
@@ -64,7 +53,6 @@ class AsciiShop {
 			ai = new MedianOperation().execute(ai);							
 		}
 
-		//Laden eines Ascii-Bildes mittels Start und Endpunkt (loadFlag)
                 if (line.contains("load")) { 	
                     as.push(new AsciiImage(ai));
                     String temp[] = line.split(" ");
@@ -85,7 +73,6 @@ class AsciiShop {
                     	ai = new LoadOperation(content).execute(ai);
                 }
 
-                //Ersetzt alle gesuchten Zeichen mit einem neuen Zeichen
                 if (line.contains("replace")) {
                     as.push(new AsciiImage(ai));
                     String temp[] = line.split(" ");
@@ -94,12 +81,10 @@ class AsciiShop {
                     ai.replace(oldChar, newChar);
                 }
 
-                //Ausgabe des Ascii-Bildes
                 if (line.contains("print")) {
                     System.out.println(ai.toString());
                 }
 
-                //Änderung rueckgaengig machen
                 if (line.contains("undo")) {
                     if (as.empty()) System.out.println("STACK EMPTY");
                     else {
@@ -109,18 +94,15 @@ class AsciiShop {
 
             }
 
-       //Abfangen einer NullPointerException
-		} catch (NullPointerException e) {
-			System.out.println("INPUT MISMATCH");
-			//e.printStackTrace();
-		}//Abfangen einer ArrayIndexOutOfBoundsException
-		catch (ArrayIndexOutOfBoundsException e){
-			System.out.println("INPUT MISMATCH");
-			//e.printStackTrace();
-		}//Abfangen einer OperationException
-		catch (OperationException e){
-			System.out.println("OPERATION FAILED");
-			//e.printStackTrace();
-		}
+        } catch (NullPointerException e) {
+            System.out.println("INPUT MISMATCH");
+            //e.printStackTrace();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+        	System.out.println("INPUT MISMATCH");
+        }
+        catch (OperationException e){
+        	System.out.println("OPERATION FAILED");
+        }
     }
 }

@@ -1,14 +1,17 @@
 public class AsciiStackNode {
 		
+		//Variabeln
 		public AsciiStackNode next;
-		public AsciiImage ai;
+		public AsciiImage aiCur;
 		
-		public AsciiStackNode(AsciiImage image, AsciiStackNode next) 
+		//Konstruktor mit Bild und Pointer
+		public AsciiStackNode(AsciiImage ai, AsciiStackNode next) 
 		{
-			ai = new AsciiImage(image);
+			aiCur = new AsciiImage(ai);
 			next = next;
 		}
 		
+		//Gibt die Gesamtgroeße zurueck
 		public int size() 
 		{
 			if (this.next == null) return 1;
@@ -17,8 +20,9 @@ public class AsciiStackNode {
 			}
 			
 		}	
-		
+		//Springt zum naechsten Nachfolgerknoten
 		public AsciiStackNode getNext() { return this.next; }
 		
-		public AsciiImage getImage() { return this.ai; }
+		//Gibt das Bild des aktuellen Knotens zurueck
+		public AsciiImage getImage() { return this.aiCur; }
 	}
