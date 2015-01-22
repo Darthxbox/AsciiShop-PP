@@ -1,0 +1,101 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
+
+class AsciiShop {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, OperationException {
+        Scanner scFile = new Scanner(System.in);
+        AsciiImage ai = null;
+        AsciiStack as = new AsciiStack();
+        boolean load = false;
+        boolean createFlag = true;
+        String loadFlag = "!";
+        boolean emptyArray = true;
+        String content = "";
+
+        try {
+
+            while (scFile.hasNext()) {
+                String line = scFile.nextLine();
+                if (line.contains("create")) {
+                    if (createFlag) {
+                        String temp[] = line.split(" ");
+                        int w = Integer.parseInt(temp[1]);
+                        int h = Integer.parseInt(temp[2]);
+                        String charset = temp[3];
+                        createFlag = false;
+                       //System.out.println(charset);
+                        ai = new AsciiImage(w, h, charset);
+
+                    } else {
+                        System.out.println("UNKNOWN COMMAND");
+                        return;
+                    }
+
+                }
+
+                if (line.contains("clear")) {
+                    as.push(new AsciiImage(ai));
+                    ai = new ClearOperation().execute(ai);
+                }
+                
+                if (line.contains("filter")) 
+                {
+                	String temp[] = line.split(" ");
+                	if(!temp[1].equals("median"))
+                	{
+                		System.out.println("INPUT MISMATCH");
+                		break;
+                	}
+			as.push(new AsciiImage(ai));
+			ai = new MedianOperation().execute(ai);							
+		}
+
+                if (line.contains("load")) { 	
+                    as.push(new AsciiImage(ai));
+                    String temp[] = line.split(" ");
+                    loadFlag = temp[1];
+                    content = "";
+                    String sLine = line;
+                    while(true) {
+                        sLine = scFile.nextLine();
+                        if(sLine.equals(loadFlag)) {
+                            break;
+                        }
+                        else{
+                            content += sLine + "\n";
+                        }
+                    }
+                    //System.out.println(content);
+                    	ai = new LoadOperation(content).execute(ai);
+                }
+
+                if (line.contains("replace")) {
+                    as.push(new AsciiImage(ai));
+                    String temp[] = line.split(" ");
+                    char oldChar = temp[1].charAt(0);
+                    char newChar = temp[2].charAt(0);
+                    ai.replace(oldChar, newChar);
+                }
+
+                if (line.contains("print")) {
+                    System.out.println(ai.toString());
+                }
+
+                if (line.contains("undo")) {
+                    if (as.empty()) System.out.println("STACK EMPTY");
+                    else {
+                        ai = as.pop();
+                    }
+                }
+
+            }
+
+        } catch (NullPointerException e) {
+           // System.out.println("INPUT MISMATCH");
+            e.printStackTrace();
+        }
+    }
+}
